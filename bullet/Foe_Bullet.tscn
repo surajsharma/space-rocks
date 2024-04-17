@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://xmw04f6ypv8e"]
+
+[ext_resource type="Script" path="res://bullet/Foe_Bullet.gd" id="1_s24jn"]
+[ext_resource type="Texture2D" uid="uid://bq723j8dxfmdt" path="res://assets/laser_green.png" id="2_qei3e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dlcy8"]
+radius = 2.0
+height = 28.0
+
+[node name="FoeBullet" type="Area2D"]
+script = ExtResource("1_s24jn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qei3e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dlcy8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
